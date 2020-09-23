@@ -91,8 +91,8 @@ function drawInitial() {
 //Cleaning Function
 //Will hide all the elements which are not necessary for a given chart type 
 
-function clean(chartType) {
-    let svg = d3.select('#vis').select('svg')
+function clean() {
+    let svg = d3.select('#vis').select('svg').select('g').remove();
 }
 
 function draw1() {
@@ -100,14 +100,14 @@ function draw1() {
     clean('isFirst')
     let x = deltaUnemploymentXScale;
     let y = deltaUnemploymentYScale;
-    let svg = d3.select('#vis').select('svg').select('g')
+    let svg = d3.select('#vis').select('svg').append("g")
+        .attr("transform","translate(" + margin.left + "," + margin.top + ")");
 
     let title = svg.append("text")
         .attr("x", width / 2)
         .attr("y", -margin.top / 4)
         .text("Percentage Change Unemployment")
         .attr("class", "h1")
-        
         .attr("text-anchor", "middle")
 
     //xAxis
@@ -126,7 +126,6 @@ function draw1() {
         .attr("opacity", ".6")
         .style("font-size", "12px")
 
-    console.log(xDomain)
     //yAxis
     let yAxisGenerator = d3.axisLeft(deltaUnemploymentYScale)
         .ticks(7)
@@ -158,7 +157,7 @@ function draw1() {
         { "Date": new Date("March 13, 2020"), text: "Stimulus Payments Start" },
     ]
 
-    let formatDate = d3.timeFormat("%d %b");
+    let formatDate = d3.timeFormat("%b %d");
     let formatPercent = d3.format(".1%");
 
     //THE GRAPH JESUS CHRIST WHY IS IT SO COMPLICATED TO DO IN D3
@@ -256,6 +255,10 @@ function draw1() {
             // d0 = dataset[i - 1],
             // d1 = dataset[i],
             d = dataset[i]
+
+        if (i>= 197) {
+            return;
+        }
 
         console.log(x0,i);
 
