@@ -1,3 +1,6 @@
 {
-    "liveServer.settings.port": 5501
+    "liveServer.settings.port": 5501,
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true,
+    "python.pythonPath": "c:\\Users\\max\\Documents\\Code\\college-majors-visualisation\\.venv\\Scripts\\python.exe"
 }
